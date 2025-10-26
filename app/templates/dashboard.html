@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Dashboard</h2>
+<p>Hello, {{ current_user.username }}{% if current_user.last_login %}, last login {{ current_user.last_login }}{% endif %}</p>
+<div class="links">
+  <a href="{{ url_for('auth.logout') }}">Logout</a>
+</div>
+{% endblock %}
+
