@@ -1,14 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
 <h2>Register</h2>
-<form method="post">
+<form method="post" novalidate>
   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-  <input name="username" placeholder="Username" required>
-  <input name="email" placeholder="Email" required>
-  <input type="password" name="password" placeholder="Password" required>
-  <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+
+  <input name="username" placeholder="Username"
+         value="{{ form.username if form else '' }}"
+         class="{% if errors and errors.username %}input-error{% endif %}">
+
+  <input name="email" placeholder="Email"
+         value="{{ form.email if form else '' }}"
+         class="{% if errors and errors.email %}input-error{% endif %}">
+
+  <input type="password" name="password" placeholder="Password"
+         class="{% if errors and errors.password %}input-error{% endif %}">
+
+  <input type="password" name="confirm_password" placeholder="Confirm Password"
+         class="{% if errors and errors.confirm_password %}input-error{% endif %}">
+
   <button type="submit">Create account</button>
 </form>
+
 <div class="links">
   <a href="{{ url_for('auth.login') }}">I have an account</a>
 </div>
